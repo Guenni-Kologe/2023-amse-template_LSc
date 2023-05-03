@@ -39,7 +39,8 @@ This dataset contains data on the different counties in Germany, such as the cou
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Set Datapipeline
+2. Analyze data
+3. More to come
 
 [i1]: https://github.com/jvalue/2023-amse-template/issues/1
