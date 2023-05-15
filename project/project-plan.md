@@ -16,7 +16,7 @@ The results of the project will help identify counties that substitute private v
 
 ### Datasource1: DB Haltetestellen
 * Metadata URL: https://data.deutschebahn.com/dataset/data-haltestellen.html
-* Data URL: https://data.deutschebahn.com/dataset/data-haltestellen/resource/21edf505-e97d-4c99-bcc9-a46e85f8620f.html
+* Data URL: https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV
 * Data Type: CSV
 
 This data set contains all important information about the stops of the German Railways (Deutsche Bahn) in Germany.
@@ -29,8 +29,8 @@ This data set contains all important information about the stops of the German R
 This dataset contains data on how many motor vehicles are registered in the respective counties of Germany.
 
 ### Datasource3: Einwohner (Landkreis)
-* Metadata URL: https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/04-kreise.html
-* Data URL: https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.destatis.de%2FDE%2FThemen%2FLaender-Regionen%2FRegionales%2FGemeindeverzeichnis%2FAdministrativ%2F04-kreise.xlsx%3F__blob%3DpublicationFile&wdOrigin=BROWSELINK
+* Metadata URL: hhttps://www.suche-postleitzahl.org/downloads#google_vignette
+* Data URL: https://downloads.suche-postleitzahl.org/v2/public/plz_einwohner.csv
 * Data Type: CSV
 
 This dataset contains data on the different counties in Germany, such as the count of the inhabitants.
