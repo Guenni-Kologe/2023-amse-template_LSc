@@ -1,9 +1,8 @@
 import pandas as pd
 import sqlalchemy as sa
-import os
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(current_dir, 'airports.sqlite')
+
+db_path = 'airports.sqlite'
 
 df = pd.read_csv('https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv', sep="; ", engine='python')
 
@@ -25,6 +24,5 @@ dtypes = {
     'geo_punkt': sa.String()
 }
 
-print(df)
 
 df.to_sql("airports", engine, if_exists="replace", index=False, dtype=dtypes)
