@@ -21,7 +21,7 @@ county_data = pd.read_csv('https://downloads.suche-postleitzahl.org/v2/public/pl
 # Connect a database
 engine = sa.create_engine(f'sqlite:///{db_path}')
 
-# Save the data to a SQL database
+# Save the data to a SQL databases
 print(vehicle_data)
 station_data.to_sql("stations", engine, if_exists="replace", index=False)
 vehicle_data.to_sql("vehicle", engine, if_exists="replace", index=False)

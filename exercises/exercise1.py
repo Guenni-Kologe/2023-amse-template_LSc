@@ -25,4 +25,6 @@ dtypes = {
     'geo_punkt': sa.String()
 }
 
+print(df)
+
 df.to_sql("airports", engine, if_exists="replace", index=False, dtype=dtypes)
