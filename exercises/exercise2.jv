@@ -1,0 +1,72 @@
+//Valuetype for Verkehr where only FV, RV and nur DPN is allowed
+valuetype Verkehr oftype text {
+  constraints: [ VerkehrName, NotEmptyName ];
+}
+
+constraint VerkehrName oftype AllowlistConstraint {
+  allowlist: ["FV", "RV", "nur DPN"];
+}
+
+//Valuetype Laenge where only Values in the Range -90 and 90 are allowed
+valuetype Laenge oftype decimal {
+  constraints: [ LaengeName];
+}
+
+
+constraint LaengeName oftype RangeConstraint {
+  lowerBound: -90;
+  upperBound: 90;
+}
+
+//Valuetype IFOPT where only the certain format is allowed
+valuetype IFOPT oftype text {
+  constraints: [ IFOPTName, NotEmptyName ];
+}
+
+constraint IFOPTName oftype RegexConstraint {
+  regex: /[a-z]{2}:\d+\d+(:\d+)?(:\d+)?/;
+}
+
+//Valuetype NotEmpty which denies empty brackets, ABER muss man das für jeden valuetype separat machen?
+valuetype NotEmpty oftype text {
+  constraints: [ NotEmptyName ];
+}
+
+constraint NotEmptyName oftype DenylistConstraint {
+  denylist: [""];
+}
+
+
+pipeline Exercise2 {
+  block DataExtractor oftype HttpExtractor { url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV"; }
+  block Exercise2TextFileInterpreter oftype TextFileInterpreter {}
+  block Exercise2CSVInterpreter oftype CSVInterpreter { enclosing: '"';}
+  block StatusColumnDeleter oftype ColumnDeleter {
+    delete: [column J];
+  }
+  block Exercise2TableInterpreter oftype TableInterpreter {
+    header: true;
+    columns: [
+      "EVA_NR" oftype integer,
+      "DS100" oftype NotEmpty,
+      "IFOPT" oftype IFOPT,
+      "NAME" oftype NotEmpty,
+      "Verkehr" oftype Verkehr,
+      "Laenge" oftype Laenge,
+      "Breite" oftype decimal,
+      "Betreiber_Name" oftype NotEmpty,
+      "Betreiber_Nr" oftype NotEmpty,
+      "Status" oftype text,
+    ]
+  ;}
+
+  block DatabaseLoader oftype SQLiteLoader { table: "trainstops"; file: "./traintops.sqlite";}
+
+  DataExtractor
+    ->Exercise2TextFileInterpreter
+    ->Exercise2CSVInterpreter
+    ->StatusColumnDeleter
+    ->Exercise2TableInterpreter
+    ->DatabaseLoader
+
+;}
