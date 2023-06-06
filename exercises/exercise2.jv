@@ -60,7 +60,7 @@ pipeline Exercise2 {
     ]
   ;}
 
-  block DatabaseLoader oftype SQLiteLoader { table: "Trainstops"; file: "../trainstops.sqlite";}
+  block DatabaseLoader oftype SQLiteLoader { table: "Trainstops"; file: "./trainstops.sqlite";}
 
   DataExtractor
     ->Exercise2TextFileInterpreter
