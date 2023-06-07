@@ -55,7 +55,7 @@ pipeline Exercise2 {
       "Laenge" oftype Laenge,
       "Breite" oftype decimal,
       "Betreiber_Name" oftype NotEmpty,
-      "Betreiber_Nr" oftype NotEmpty,
+      "Betreiber_Nr" oftype integer,
       "Status" oftype text,
     ]
   ;}
