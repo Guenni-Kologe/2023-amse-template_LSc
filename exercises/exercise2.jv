@@ -40,9 +40,9 @@ constraint NotEmptyName oftype DenylistConstraint {
 pipeline Exercise2 {
   block DataExtractor oftype HttpExtractor { url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV"; }
   block Exercise2TextFileInterpreter oftype TextFileInterpreter {}
-  block Exercise2CSVInterpreter oftype CSVInterpreter { enclosing: ';';}
+  block Exercise2CSVInterpreter oftype CSVInterpreter { delimiter: ';';}
   block StatusColumnDeleter oftype ColumnDeleter {
-    delete: [column A];
+    delete: [column J];
   }
   block Exercise2TableInterpreter oftype TableInterpreter {
     header: true;
