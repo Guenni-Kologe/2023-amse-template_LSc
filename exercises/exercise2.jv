@@ -1,4 +1,4 @@
-//Valuetype for Verkehr where only FV, RV and nur DPN is allowed
+//Valuetype for Verkehr where only FV, RV and nur DPN is allowed && Not Empty
 valuetype Verkehr oftype text {
   constraints: [ VerkehrName, NotEmptyName ];
 }
@@ -7,7 +7,7 @@ constraint VerkehrName oftype AllowlistConstraint {
   allowlist: ["FV", "RV", "nur DPN"];
 }
 
-//Valuetype Laenge where only Values in the Range -90 and 90 are allowed
+//Valuetype Laenge where only Values in the Range -90 and 90 are allowed 
 valuetype Laenge oftype decimal {
   constraints: [ LaengeName];
 }
@@ -18,7 +18,7 @@ constraint LaengeName oftype RangeConstraint {
   upperBound: 90;
 }
 
-//Valuetype IFOPT where only the certain format is allowed
+//Valuetype IFOPT where only the certain format is allowed && not empty
 valuetype IFOPT oftype text {
   constraints: [ IFOPTName, NotEmptyName ];
 }
@@ -27,7 +27,7 @@ constraint IFOPTName oftype RegexConstraint {
   regex: /[a-z]{2}:\d+\d+(:\d+)?(:\d+)?/;
 }
 
-//Valuetype NotEmpty which denies empty brackets, ABER muss man das für jeden valuetype separat machen?
+//Valuetype NotEmpty which denies empty brackets, ABER muss man das für jeden valuetype separat machen? Result: Ja
 valuetype NotEmpty oftype text {
   constraints: [ NotEmptyName ];
 }
@@ -53,7 +53,7 @@ pipeline Exercise2 {
       "NAME" oftype NotEmpty,
       "Verkehr" oftype Verkehr,
       "Laenge" oftype Laenge,
-      "Breite" oftype decimal,
+      "Breite" oftype Laenge,
       "Betreiber_Name" oftype NotEmpty,
       "Betreiber_Nr" oftype integer,
       "Status" oftype text,
