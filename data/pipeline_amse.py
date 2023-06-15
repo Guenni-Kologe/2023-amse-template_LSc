@@ -71,13 +71,13 @@ filtered_df_ackerschlepper = df[df["Ackerschlepper"].notnull() & (df["Ackerschle
 max_registered_vehicles = filtered_df_pkw["Registered Vehicles"].astype(int).max()
 max_inhabitants = filtered_df_pkw["Inhabitants"].astype(int).max()
 
-print(filtered_df_pkw["Inhabitants"].astype(int).max())
-print(" <- max | Inhabitants | min - >")
-print(filtered_df_pkw["Inhabitants"].astype(int).min())
+#print(filtered_df_pkw["Inhabitants"].astype(int).max())
+#print(" <- max | Inhabitants | min - >")
+#print(filtered_df_pkw["Inhabitants"].astype(int).min())
 
-print(filtered_df_pkw["Registered Vehicles"].astype(int).max())
-print(" <- max | Pkw | min - >")
-print(filtered_df_pkw["Registered Vehicles"].astype(int).min())
+#print(filtered_df_pkw["Registered Vehicles"].astype(int).max())
+#print(" <- max | Pkw | min - >")
+#print(filtered_df_pkw["Registered Vehicles"].astype(int).min())
 
 min_registered_vehicles = filtered_df_pkw["Registered Vehicles"].astype(int).min()
 # Set the desired number of tick marks
