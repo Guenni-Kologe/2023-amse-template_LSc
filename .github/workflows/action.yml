@@ -1,4 +1,4 @@
-name: Run test
+name: Test Action
 
 on:
   push:
@@ -19,7 +19,6 @@ jobs:
           node-version: '14'
 
       - name: Run tests
-        run: 
-          cd 2023-amse-template_LSc/project
+        run: |
           chmod +x tests.sh
           ./tests.sh
