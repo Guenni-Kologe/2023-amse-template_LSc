@@ -43,7 +43,7 @@ county_data.to_sql("county", engine, if_exists="replace", index=False)
 
 # Query the needed data from the SQLite Database and store it in a DataFrame
 query = sa.text("""
-SELECT DISTINCT c.note AS County, c.einwohner AS Inhabitants, v.Pkw AS "Registered Vehicles", v.Kraftomnibusse AS "Busses"
+SELECT DISTINCT c.note AS County, c.einwohner AS Inhabitants, v.Pkw AS "Registered Vehicles", v.Kraftomnibusse AS "Buses"
 FROM county AS c
 RIGHT OUTER JOIN vehicle AS v ON c.note = v.county
 """)
@@ -52,10 +52,10 @@ conn = engine.connect() # Execute the query and fetch the data
 result = conn.execute(query)
 data = result.fetchall()
 
-df = pd.DataFrame(data, columns=["County", "Inhabitants", "Registered Vehicles", "Registered Busses"]) # Create the DataFrame
+df = pd.DataFrame(data, columns=["County", "Inhabitants", "Registered Vehicles", "Registered Buses"]) # Create the DataFrame
 df["Inhabitants"] = pd.to_numeric(df["Inhabitants"], errors="coerce").astype(pd.Int64Dtype())
 df["Registered Vehicles"] = pd.to_numeric(df["Registered Vehicles"], errors="coerce").astype(pd.Int64Dtype())
-df["Registered Busses"] = pd.to_numeric(df["Registered Busses"], errors="coerce").astype(pd.Int64Dtype())
+df["Registered Buses"] = pd.to_numeric(df["Registered Buses"], errors="coerce").astype(pd.Int64Dtype())
 df.to_sql("result", engine, if_exists="replace", index=False)
 
 conn.close()
