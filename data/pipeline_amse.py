@@ -43,9 +43,8 @@ county_data.to_sql("county", engine, if_exists="replace", index=False)
 
 # Query the needed data from the SQLite Database and store it in a DataFrame
 query = sa.text("""
-SELECT DISTINCT c.note AS County, c.einwohner AS Inhabitants, v.Pkw AS "Registered Vehicles", v.Kraftomnibusse AS "Buses"
-FROM county AS c
-RIGHT OUTER JOIN vehicle AS v ON c.note = v.county
+SELECT DISTINCT c.note AS County, c.einwohner AS Inhabitants, v.Pkw AS "Registered Vehicles", v.Kraftomnibusse AS "Regsitered Buses"
+FROM county AS c JOIN vehicle AS v ON c.note = v.county
 """)
 
 conn = engine.connect() # Execute the query and fetch the data
