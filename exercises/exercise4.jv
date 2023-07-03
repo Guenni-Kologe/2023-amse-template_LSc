@@ -22,7 +22,7 @@ pipeline Exercise4 {
     block ZipInterpreterBlock oftype ArchiveInterpreter {
         archiveType: "zip";}
     block FilePickerBlock oftype FilePicker {
-        path: "./data.csv";}
+        path: "data.csv";}
   block Exercise4TextFileInterpreter oftype TextFileInterpreter {}
   block Exercise4CSVInterpreter oftype CSVInterpreter { delimiter: ';';}
   block Exercise4RangeSelector oftype CellRangeSelector {
@@ -48,7 +48,7 @@ pipeline Exercise4 {
   outputColumn: 'Temperatur';
   use: CelsiusToFahrenheit;}
 
-  block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite";}
+  block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
 
   ExtractorBlock
     ->ZipInterpreterBlock
