@@ -5,6 +5,13 @@ transform CelsiusToFahrenheit {
   tempFahrenheit: (tempCelsius * 9/5) + 32;
 }
 
+transform ActiveBoolean {
+  from statusText oftype text;
+  to statusBoolean oftype boolean;
+
+  statusBoolean: statusText == "Ja";
+}
+
 valuetype Geraet oftype decimal {
   constraints: [ GeraetName];
 }
@@ -66,6 +73,11 @@ pipeline Exercise4 {
     outputColumn: "Batterietemperatur";
     use: CelsiusToFahrenheit;}
 
+  block ActiveBooleanTransformer oftype TableTransformer {
+    inputColumn: "Geraet aktiv";
+    outputColumn: "Geraet aktiv";
+    use: ActiveBoolean;}
+
   block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
 
   ExtractorBlock
@@ -80,6 +92,7 @@ pipeline Exercise4 {
     ->Exercise4TableInterpreter
     ->TemperaturTransformer
     ->BatterieTransformer
+    ->ActiveBooleanTransformer
     ->DatabaseLoader
 
 ;}
