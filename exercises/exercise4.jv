@@ -21,8 +21,8 @@ pipeline Exercise4 {
     block ExtractorBlock oftype HttpExtractor { url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"; }
     block ZipInterpreterBlock oftype ArchiveInterpreter {
         archiveType: "zip";}
-    block FilePickerBlock oftype FilePicker {
-        path: "data.csv";}
+    block Exercise4PickerBlock oftype FilePicker {
+        path: "/data.csv";}
   block Exercise4TextFileInterpreter oftype TextFileInterpreter {}
   block Exercise4CSVInterpreter oftype CSVInterpreter { delimiter: ';';}
   block Exercise4RangeSelector oftype CellRangeSelector {
@@ -31,6 +31,17 @@ pipeline Exercise4 {
   block Exercise4ColumnDeleter oftype ColumnDeleter {
     delete: [column F, column G, column H, column I];
   }
+
+    block NameHeaderWriter oftype CellWriter {
+  at: cell E1;
+  write: ["Temperatur"];
+}
+
+    block Name2HeaderWriter oftype CellWriter {
+  at: cell F1;
+  write: ["Batterietemperatur"];
+}
+
   block Exercise4TableInterpreter oftype TableInterpreter {
     header: true;
     columns: [
@@ -43,22 +54,32 @@ pipeline Exercise4 {
       "Geraet aktiv" oftype text,
     ]
   ;}
-  block CelsiusToFahrenheitTransformer oftype TableTransformer {
-  inputColumn: 'Temperatur';
-  outputColumn: 'Temperatur';
-  use: CelsiusToFahrenheit;}
+
+
+  block TemperaturTransformer oftype TableTransformer {
+    inputColumn: "Temperatur";
+    outputColumn: "Temperatur";
+    use: CelsiusToFahrenheit;}
+
+  block BatterieTransformer oftype TableTransformer {
+    inputColumn: "Batterietemperatur";
+    outputColumn: "Batterietemperatur";
+    use: CelsiusToFahrenheit;}
 
   block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
 
   ExtractorBlock
     ->ZipInterpreterBlock
-    ->FilePickerBlock
+    ->Exercise4PickerBlock
     ->Exercise4TextFileInterpreter
     ->Exercise4CSVInterpreter
     ->Exercise4RangeSelector
     ->Exercise4ColumnDeleter
+    ->NameHeaderWriter
+    ->Name2HeaderWriter
     ->Exercise4TableInterpreter
-    ->CelsiusToFahrenheitTransformer
+    ->TemperaturTransformer
+    ->BatterieTransformer
     ->DatabaseLoader
 
 ;}
