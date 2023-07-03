@@ -51,7 +51,7 @@ pipeline Exercise4 {
       "Monat" oftype integer,
       "Temperatur" oftype decimal,
       "Batterietemperatur" oftype decimal,
-      "Geraet aktiv" oftype text,
+      "Geraet aktiv" oftype boolean,
     ]
   ;}
 
