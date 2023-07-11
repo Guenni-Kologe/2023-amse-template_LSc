@@ -1,5 +1,14 @@
 import pandas as pd
 import sqlite3
+from urllib.request import urlretrieve
+import zipfile
+
+link = "https://gtfs.rhoenenergie-bus.de/GTFS.zip"
+
+retrieve = urlretrieve(link, "GTFS.zip")
+
+with zipfile.ZipFile("GTFS.zip") as zip:
+    zip.extract("stops.txt", path="exercises")
 
 stops_df = pd.read_csv("exercises/stops.txt", dtype={"stop_id": str, "stop_name": str, "stop_lat": float, "stop_lon": float, "zone_id": str})
 
