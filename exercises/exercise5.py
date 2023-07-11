@@ -23,7 +23,7 @@ stops_df.dropna(subset=["stop_name", "stop_lat", "stop_lon"], inplace=True)
 
 columns_to_keep = ["stop_id", "stop_name", "stop_lat", "stop_lon", "zone_id"]
 
-conn = sqlite3.connect("exercises/gtfs.sqlite")
+conn = sqlite3.connect("gtfs.sqlite")
 stops_df[columns_to_keep].to_sql("stops", conn, if_exists="replace", index=False)
 conn.close()
 
