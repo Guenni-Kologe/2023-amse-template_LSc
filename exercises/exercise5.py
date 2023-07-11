@@ -10,10 +10,10 @@ retrieve = urlretrieve(link, "GTFS.zip")
 with zipfile.ZipFile("GTFS.zip") as zip:
     zip.extract("stops.txt", path="exercises")
 
-stops_df = pd.read_csv("exercises/stops.txt", dtype={"stop_id": str, "stop_name": str, "stop_lat": float, "stop_lon": float, "zone_id": str})
+stops_df = pd.read_csv("exercises/stops.txt", dtype={"stop_id": int, "stop_name": str, "stop_lat": float, "stop_lon": float, "zone_id": int})
 
 stops_df["stop_name"] = stops_df["stop_name"].str.encode("unicode_escape").str.decode("unicode_escape")
-stops_df = stops_df[(stops_df["zone_id"] == "2001") &
+stops_df = stops_df[(stops_df["zone_id"] == 2001) &
                     (stops_df["stop_lat"] >= -90) &
                     (stops_df["stop_lat"] <= 90) &
                     (stops_df["stop_lon"] >= -90) &
